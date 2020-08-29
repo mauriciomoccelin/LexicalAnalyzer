@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Lexical.Analyser
+namespace Analyser.Lexical
 {
     public sealed class TokenDefinition
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lexical.Analyser
+namespace Analyser.Lexical
 {
     public interface ILexer
     {

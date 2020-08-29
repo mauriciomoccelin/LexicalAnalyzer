@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EC1BC846-CFCF-49F2-BAD1-F6529F6E9D32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexical.Analyser", "src\Lexical.Analyser\Lexical.Analyser.csproj", "{395307D6-1C4F-4140-90CC-82685CFED347}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyser.Lexical", "src\Analyser.Lexical\Analyser.Lexical.csproj", "{395307D6-1C4F-4140-90CC-82685CFED347}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{73927E48-BA3A-4C53-BF69-3C83F71F0D95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexical.Analyser.Tests", "test\Lexical.Analyser.Tests\Lexical.Analyser.Tests.csproj", "{6CC998A6-1901-450A-967A-11DDA5638AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyser.Lexical.Tests", "test\Analyser.Lexical.Tests\Analyser.Lexical.Tests.csproj", "{6CC998A6-1901-450A-967A-11DDA5638AFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Lexical.Analyser
+namespace Analyser.Lexical
 {
     public sealed class Lexer : ILexer
     {

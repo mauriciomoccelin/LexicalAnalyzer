@@ -1,10 +1,10 @@
-using Lexical.Analyser;
+using Analyser.Lexical;
 using FluentAssertions;
 using System;
 using System.Text.RegularExpressions;
 using Xunit;
 
-namespace Lexical.Analyser.Tests
+namespace Analyser.Lexical.Tests
 {
     public class Lexer_Test
     {
