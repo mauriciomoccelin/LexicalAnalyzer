@@ -11,6 +11,8 @@ namespace Analyser.Lexical
         TypeInt = 5,
         TypeChar = 6,
         TypeFloat = 7,
-        Identifier = 8
+        Identifier = 8,
+        Comma = 9,
+        Semicolon = 10
     }
 }
