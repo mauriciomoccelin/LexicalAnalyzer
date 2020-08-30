@@ -4,7 +4,7 @@
 <variable_declaration> 	  	::=	<type> <identifier> {,<identifier>}* ";"
 
 
-<typo> 		  		::=	int
+<type> 		  		::=	int
 						float
 						char
 
