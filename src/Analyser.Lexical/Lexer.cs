@@ -92,7 +92,7 @@ namespace Analyser.Lexical
             }
 
             yield return new Token(
-                "(EOF)",
+                TokenTypeEnum.Eof,
                 null,
                 new TokenPosition(
                     currentLine,

@@ -4,13 +4,13 @@ namespace Analyser.Lexical
 {
     public sealed class TokenDefinition
     {
-        public string Type { get; private set; }
+        public TokenTypeEnum Type { get; private set; }
         public Regex Regex { get; private set; }
         public bool IsIgnored { get; private set; }
 
         private TokenDefinition(
             Regex regex,
-            string type,
+            TokenTypeEnum type,
             bool isIgnored
         )
         {
@@ -23,7 +23,7 @@ namespace Analyser.Lexical
         {
             public static TokenDefinition Create(
                 Regex regex,
-                string type,
+                TokenTypeEnum type,
                 bool isIgnored = false
             )
             {

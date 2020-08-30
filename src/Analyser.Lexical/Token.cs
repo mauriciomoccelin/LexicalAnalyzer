@@ -2,12 +2,12 @@ namespace Analyser.Lexical
 {
     public sealed class Token
     {
-        public string Type { get; private set; }
+        public TokenTypeEnum Type { get; private set; }
         public string Value { get; private set; }
         public TokenPosition Position { get; private set; }
         
         internal Token(
-            string type,
+            TokenTypeEnum type,
             string value,
             TokenPosition position
         )

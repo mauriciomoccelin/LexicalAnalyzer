@@ -1,0 +1,14 @@
+<program> 	  			::= 	int main"("")" <block>
+
+
+<variable_declaration> 	  	::=	<type> <identifier> {,<identifier>}* ";"
+
+
+<typo> 		  		::=	int
+						float
+						char
+
+
+<comand> 	  			::=	<basic>
+						<loop>
+						<conditional>
