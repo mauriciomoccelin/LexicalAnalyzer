@@ -13,6 +13,8 @@ namespace Analyser.Lexical
         TypeFloat = 7,
         Identifier = 8,
         Comma = 9,
-        Semicolon = 10
+        Semicolon = 10,
+        ConditionalIf = 11,
+        InteractionWhile = 12
     }
 }

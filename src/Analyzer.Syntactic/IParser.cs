@@ -6,6 +6,9 @@ namespace Analyzer.Syntactic
         void Block();
         void VariableDeclaration();
         void CommandDeclaration();
+        void BasicCommandDeclaration();
+        void InteractionCommandDeclaration();
+        void ConditionalCommandDeclaration();
         void AddError(string error);
     }
 }

@@ -89,7 +89,34 @@ namespace Analyzer.Syntactic
 
         public void CommandDeclaration()
         {
-            throw new System.NotImplementedException();
+            if (tokens.Current.IsBasicCommand())
+            {
+                BasicCommandDeclaration();
+            }
+            else if (tokens.Current.IsInteractionCommand())
+            {
+                InteractionCommandDeclaration();
+            }
+            else if (tokens.Current.IsConditionalCommand())
+            {
+                ConditionalCommandDeclaration();
+            }
+            else AddError(tokens.Current.ToString());
+        }
+
+        public void BasicCommandDeclaration()
+        {
+            
+        }
+        
+        public void InteractionCommandDeclaration()
+        {
+            
+        }
+
+        public void ConditionalCommandDeclaration()
+        {
+            
         }
 
         public void AddError(string error)

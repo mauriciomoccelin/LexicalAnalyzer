@@ -34,5 +34,20 @@ namespace Analyzer.Syntactic
         {
             return command.Contains(token.Type);
         }
+        
+        public static bool IsBasicCommand(this Token token)
+        {
+            return token.Type == TokenTypeEnum.Comma;
+        }
+        
+        public static bool IsInteractionCommand(this Token token)
+        {
+            return token.Type == TokenTypeEnum.InteractionWhile;
+        }
+
+        public static bool IsConditionalCommand(this Token token)
+        {
+            return token.Type == TokenTypeEnum.ConditionalIf;
+        }
     }
 }
