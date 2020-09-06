@@ -15,6 +15,7 @@ namespace Analyser.Lexical
         Comma = 9,
         Semicolon = 10,
         ConditionalIf = 11,
-        InteractionWhile = 12
+        InteractionWhile = 12,
+        Assignment = 13
     }
 }

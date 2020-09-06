@@ -30,6 +30,11 @@ namespace Analyzer.Syntactic
             return token.Type == TokenTypeEnum.Comma;
         }
         
+        public static bool IsSemicolon(this Token token)
+        {
+            return token.Type == TokenTypeEnum.Semicolon;
+        }
+        
         public static bool IsCommand(this Token token)
         {
             return command.Contains(token.Type);
@@ -48,6 +53,16 @@ namespace Analyzer.Syntactic
         public static bool IsConditionalCommand(this Token token)
         {
             return token.Type == TokenTypeEnum.ConditionalIf;
+        }
+
+        public static bool IsAssignment(this Token token)
+        {
+            return token.Type == TokenTypeEnum.Assignment;
+        }
+        
+        public static bool IsBlockAssignment(this Token token)
+        {
+            return token.Type == TokenTypeEnum.OpenKeys;
         }
     }
 }

@@ -1,3 +1,5 @@
+using Analyser.Lexical;
+
 namespace Analyzer.Syntactic
 {
     public interface IParser
@@ -9,6 +11,9 @@ namespace Analyzer.Syntactic
         void BasicCommandDeclaration();
         void InteractionCommandDeclaration();
         void ConditionalCommandDeclaration();
-        void AddError(string error);
+        void AssignmentDeclaration();
+        Expressions ArithmeticExpression();
+        void CheckExpressions(Expressions first, Expressions second);
+        void AddError(Token token);
     }
 }
