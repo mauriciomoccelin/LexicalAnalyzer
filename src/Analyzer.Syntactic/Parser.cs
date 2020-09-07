@@ -168,12 +168,12 @@ namespace Analyzer.Syntactic
 
         public void InteractionCommandDeclaration()
         {
-            
+            throw new System.NotImplementedException();
         }
 
         public void ConditionalCommandDeclaration()
         {
-            
+            throw new System.NotImplementedException();
         }
         
         public Expressions FirstArithmeticExpressionDeclaration()
@@ -187,12 +187,30 @@ namespace Analyzer.Syntactic
             return third;
         }
 
-        private Expressions SecondArithmeticExpressionDeclaration()
+        private Expressions TermDeclaration()
+        {
+            var first = FactorDeclaration();
+
+            while (tokens.Current.IsFactorInExpression())
+            {
+                var firstOperator = tokens.Current.Type;
+                tokens.MoveNext();
+                var second = FactorDeclaration();
+                
+                var third = Expressions.Factory.Create(tokens.Current.Value, second.Type);
+
+                first = third;
+            }
+
+            return first;
+        }
+
+        private Expressions FactorDeclaration()
         {
             throw new System.NotImplementedException();
         }
 
-        private Expressions TermDeclaration()
+        private Expressions SecondArithmeticExpressionDeclaration()
         {
             throw new System.NotImplementedException();
         }

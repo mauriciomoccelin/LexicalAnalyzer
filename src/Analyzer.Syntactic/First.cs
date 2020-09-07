@@ -26,6 +26,11 @@ namespace Analyzer.Syntactic
             TokenTypeEnum.InteractionWhile
         };
         
+        private static readonly TokenTypeEnum[] factor = {
+            TokenTypeEnum.OperatorMultiplication,
+            TokenTypeEnum.OperatorDivision
+        };
+        
         public static bool IsVariableDeclaration(this Token token)
         {
             return types.Contains(token.Type);
@@ -74,6 +79,11 @@ namespace Analyzer.Syntactic
         public static bool IsBlockAssignment(this Token token)
         {
             return token.Type == TokenTypeEnum.OpenKeys;
+        }
+        
+        public static bool IsFactorInExpression(this Token token)
+        {
+            return factor.Contains(token.Type);
         }
     }
 }
