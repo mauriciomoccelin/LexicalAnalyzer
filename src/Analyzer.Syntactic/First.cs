@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Analyser.Lexical;
 
@@ -11,8 +12,18 @@ namespace Analyzer.Syntactic
             TokenTypeEnum.TypeFloat,
         };
 
-        private static readonly TokenTypeEnum[] command = {
+        private static readonly TokenTypeEnum[] commandBasic =
+        {
+            TokenTypeEnum.OpenKeys,
             TokenTypeEnum.Identifier
+        };
+        
+        private static readonly TokenTypeEnum[] command = 
+        {
+            TokenTypeEnum.OpenKeys,
+            TokenTypeEnum.Identifier,
+            TokenTypeEnum.ReservedWordFor,
+            TokenTypeEnum.InteractionWhile
         };
         
         public static bool IsVariableDeclaration(this Token token)
@@ -42,7 +53,7 @@ namespace Analyzer.Syntactic
         
         public static bool IsBasicCommand(this Token token)
         {
-            return token.Type == TokenTypeEnum.Comma;
+            return commandBasic.Contains(token.Type);
         }
         
         public static bool IsInteractionCommand(this Token token)
