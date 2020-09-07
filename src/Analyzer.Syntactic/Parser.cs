@@ -193,7 +193,6 @@ namespace Analyzer.Syntactic
 
             while (tokens.Current.IsFactorInExpression())
             {
-                var firstOperator = tokens.Current.Type;
                 tokens.MoveNext();
                 var second = FactorDeclaration();
                 
