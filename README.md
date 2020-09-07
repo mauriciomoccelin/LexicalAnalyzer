@@ -1,54 +1,29 @@
-# LexicalAnalyzer
+# Compiler
 
- ## Analisador Léxico para uma linguagem hipotética.
- A partir de uma entrada, onde contem uma cadeia de caracteres, é gerado uma lista de lexemas+tokens.
- Exemplo: "var resultado = (34 / (3 + 5)", gera os seguintes lexemas+tokens.
-- 'var' → RESERVED_WORD_VAR
-- 'resultado' → IDENTIFIER
-- '=' → ASSIGNMENT
-- '34' → NUMBER
-- '/' → OPERATOR_DIVISION
-- '(' → DELIMITER_OPEN_PARENTHESES
-- '3' → NUMBER
-- '+' → OPERATOR_SUM
-- '5' → NUMBER
-- ')' → DELIMITER_CLOSE_PARENTHESES
+## Technologies implemented:
 
-## Como usar
+* .NET Core 3.1
 
- Disponível em: [Nuget](https://www.nuget.org/packages/LexicalAnalyzer/1.0.1/)
- Install into your PCL project and Client projects.
+## Test
+
+In the test folder (`test/Compiler.Tests/`), run the tests with the command `dotnet test`
+
+The output will be something like
 
 ```
-        static void Main(string[] args)
-        {
-            string codigo = "var teste = (34 / (3.5 + 5^2) ." +
-                            "if (34 >= 5) { return; }";
+Microsoft (R) Test Execution Command Line Tool Version 16.7.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
-            Lexer lexer = new Lexer();
-            IEnumerable<TokenDefinition> tokenDefinition = TokenDefinition.GetTokens();
+Starting test execution, please wait...
 
-            foreach (var token in tokenDefinition)
-            {
-                lexer.AddDefinition(token);
-            }
+A total of 1 test files matched the specified pattern.
 
-            var tokens = lexer.Tokenize(codigo).ToList();
+Test Run Successful.
+Total tests: 1
+     Passed: 1
+Total time: 1.6700 Seconds
 
-            foreach (var item in tokens)
-            {
-                Console.WriteLine(item.ToString());
-            }
-
-            Console.Read();
-        }
 ```
-
- O Analisador Léxico foi feito baseado em definições regulares que analisam os padrões do código de entrada e Autômatos Finitos que aceitam as definições regulares.
-
-## Tecnologias implementadas:
-
- .NET Core 2.0
 
 ### Sobre:
- Desenvolvido por [Mauricio Moccelin](https://www.linkedin.com/in/mauriciomoccelin/) sobre [Licença](https://www.gnu.org/licenses/licenses.pt-br.html).
+Developed by [Mauricio Moccelin](https://www.linkedin.com/in/mauriciomoccelin/) sobre [Licença](https://www.gnu.org/licenses/licenses.pt-br.html).
