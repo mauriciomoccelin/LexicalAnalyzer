@@ -178,7 +178,13 @@ namespace Analyzer.Syntactic
         
         public Expressions FirstArithmeticExpressionDeclaration()
         {
-            throw new System.NotImplementedException();
+            var first = TermDeclaration();
+            var second = SecondArithmeticExpressionDeclaration();
+                        
+            if (second is null) return first;
+            
+            var third = Expressions.Factory.Create(tokens.Current.Value, second.Type);
+            return third;
         }
 
         private Expressions SecondArithmeticExpressionDeclaration()
