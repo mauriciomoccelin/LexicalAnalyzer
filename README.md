@@ -25,5 +25,5 @@ Total time: 1.6700 Seconds
 
 ```
 
-### Sobre:
+### About:
 Developed by [Mauricio Moccelin](https://www.linkedin.com/in/mauriciomoccelin/) sobre [Licença](https://www.gnu.org/licenses/licenses.pt-br.html).
