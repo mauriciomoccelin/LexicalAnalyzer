@@ -1,14 +1,33 @@
-<program> 	  			::= 	int main"("")" <block>
+<program>                     ::= int main"("")" <block>
+
+<variable_declaration>        ::= <type> <identifier> {,<identifier>}* ";"
+
+<type>                        ::= int
+                                  real
+                                  char
 
 
-<variable_declaration> 	  	::=	<type> <identifier> {,<identifier>}* ";"
+<comand>                      ::= <basic>
+                                  <loop>
+                                  <conditional>
 
+<command_basic>               ::= <assignment>
+                                  <block>
 
-<type> 		  		::=	int
-						float
-						char
+<bloco>                       ::= "{" {<variable_declaration>}* {<comand>}* "}"
 
+<assignment>                  ::= <identifier> "=" <arithmetic_expression> ";"
 
-<comand> 	  			::=	<basic>
-						<loop>
-						<conditional>
+<expr_arit>                   ::= <arithmetic_expression> "+" <term>
+                                  <arithmetic_expression> "-" <term>
+                                  <term>
+
+<term>                        ::= <term> "*" <factor>
+                                  <termo> "/” <factor>
+                                  <factor>
+
+<fator>                       ::= "(" <arithmetic_expression> ")"
+                                  <identifier>
+                                  <int>
+                                  <real>
+                                  <char>
