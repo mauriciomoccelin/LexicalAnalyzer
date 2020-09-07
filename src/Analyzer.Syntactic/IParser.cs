@@ -4,6 +4,7 @@ namespace Analyzer.Syntactic
 {
     public interface IParser
     {
+        void Run();
         void Program();
         void Block();
         void VariableDeclaration();
@@ -12,7 +13,7 @@ namespace Analyzer.Syntactic
         void InteractionCommandDeclaration();
         void ConditionalCommandDeclaration();
         void AssignmentDeclaration();
-        Expressions ArithmeticExpression();
+        Expressions FirstArithmeticExpressionDeclaration();
         void CheckExpressions(Expressions first, Expressions second);
         void AddError(Token token);
     }

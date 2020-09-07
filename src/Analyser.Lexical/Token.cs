@@ -19,13 +19,13 @@ namespace Analyser.Lexical
 
         public override string ToString()
         {
-            return $@"
-                Token: Type: {Type}, 
-                Value: {Value}, 
-                Position => Index: {Position.Index},
-                Line: {Position.Line},
-                Column: {Position.Column}
-            ";
+            var type = $"Token: Type: {Type}";
+            var value = $"Value: {Value}";
+            var position = $"Position => Index: {Position.Index}";
+            var line = $"Line: {Position.Line}";
+            var column = $"Column: {Position.Column}";
+            
+            return $"{type}, {value}, {position}, {line}, {column}";
         }
     }
 }

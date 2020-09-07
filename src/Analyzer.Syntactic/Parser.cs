@@ -18,23 +18,34 @@ namespace Analyzer.Syntactic
             symbols = new List<Symbols>();
             this.tokens = tokens?.GetEnumerator() ?? Enumerable.Empty<Token>().GetEnumerator();
         }
-        
+
+        public void Run()
+        {
+            tokens.MoveNext();
+            Program();
+        }
+
         public void Program()
         {
-            if (tokens.Current.Type.Equals(TokenTypeEnum.Main))
+            if (tokens.Current.Type.Equals(TokenTypeEnum.TypeInt))
             {
                 tokens.MoveNext();
-                if (tokens.Current.Type.Equals(TokenTypeEnum.OpenParentheses))
+                if (tokens.Current.Type.Equals(TokenTypeEnum.Main))
                 {
                     tokens.MoveNext();
-                    if (tokens.Current.Type.Equals(TokenTypeEnum.CloseParentheses))
+                    if (tokens.Current.Type.Equals(TokenTypeEnum.OpenParentheses))
                     {
                         tokens.MoveNext();
-                        Block();
-                    }
+                        if (tokens.Current.Type.Equals(TokenTypeEnum.CloseParentheses))
+                        {
+                            tokens.MoveNext();
+                            Block();
+                        }
+                        else AddError(tokens.Current);
+                    } 
                     else AddError(tokens.Current);
-                } 
-                else AddError(tokens.Current);
+                }
+                else AddError(tokens.Current);   
             }
             else AddError(tokens.Current);
         }
@@ -63,16 +74,19 @@ namespace Analyzer.Syntactic
 
         public void VariableDeclaration()
         {
+            var type = tokens.Current.Type;
+            tokens.MoveNext();
+            
             if (tokens.Current.IsIdentifier())
             {
-                AddSymbol();
+                AddSymbol(type);
                 tokens.MoveNext();
                 while (tokens.Current.IsComma())
                 {
                     tokens.MoveNext();
                     if (tokens.Current.IsIdentifier())
                     {
-                        AddSymbol();
+                        AddSymbol(type);
                         tokens.MoveNext();
                     }
                     else AddError(tokens.Current);
@@ -101,7 +115,11 @@ namespace Analyzer.Syntactic
             {
                 ConditionalCommandDeclaration();
             }
-            else AddError(tokens.Current);
+            else
+            {
+                AddError(tokens.Current);
+                tokens.MoveNext();
+            }
         }
 
         public void BasicCommandDeclaration()
@@ -133,7 +151,7 @@ namespace Analyzer.Syntactic
                 {
                     tokens.MoveNext();
 
-                    var secondExpressions = ArithmeticExpression();
+                    var secondExpressions = FirstArithmeticExpressionDeclaration();
 
                     CheckExpressions(firstExpressions, secondExpressions);
 
@@ -158,6 +176,21 @@ namespace Analyzer.Syntactic
             
         }
         
+        public Expressions FirstArithmeticExpressionDeclaration()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private Expressions SecondArithmeticExpressionDeclaration()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private Expressions TermDeclaration()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void AddError(Token token)
         {
             errors.Add($"Incorrect Syntrax near: {token}");
@@ -166,11 +199,6 @@ namespace Analyzer.Syntactic
         public void CheckExpressions(Expressions first, Expressions second)
         {
             if (!first.Equals(second)) AddError(tokens.Current);
-        }
-        
-        public Expressions ArithmeticExpression()
-        {
-            throw new System.NotImplementedException();
         }
 
         private Symbols GetSymbol(Token token)
@@ -182,9 +210,9 @@ namespace Analyzer.Syntactic
             return symbol;
         }
 
-        private void AddSymbol()
+        private void AddSymbol(TokenTypeEnum type)
         {
-            switch (tokens.Current.Type)
+            switch (type)
             {
                 case TokenTypeEnum.TypeInt:
                     symbols.Add(Symbols.Factory.CreateForIntType(scope, tokens.Current.Value));
