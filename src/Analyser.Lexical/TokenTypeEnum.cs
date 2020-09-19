@@ -2,6 +2,7 @@ namespace Analyser.Lexical
 {
     public enum TokenTypeEnum
     {
+        Undefined = -2,
         Eof = -1,
         Main = 0,
         OpenParentheses = 1,
@@ -45,5 +46,6 @@ namespace Analyser.Lexical
         ReservedWordFunction = 39,
         Number = 40,
         Real = 41,
+        Char = 42
     }
 }

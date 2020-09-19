@@ -206,7 +206,51 @@ namespace Analyzer.Syntactic
 
         private Expressions FactorDeclaration()
         {
-            throw new System.NotImplementedException();
+            var type = TokenTypeEnum.Undefined;
+            Expressions first;
+            
+            if (tokens.Current.Equals(TokenTypeEnum.OpenParentheses))
+            {
+                tokens.MoveNext();
+                first = FirstArithmeticExpressionDeclaration();
+                if (tokens.Current.Equals(TokenTypeEnum.CloseParentheses))
+                {
+                    tokens.MoveNext();
+                } else AddError(tokens.Current);
+
+                return first;
+            }
+
+            var lexeme = tokens.Current.Value;
+            if (tokens.Current.IsAssignment())
+            {
+                var symbol = GetSymbol(tokens.Current);
+                if (symbol is null) AddError(tokens.Current);
+
+                type = symbol.Type;
+                tokens.MoveNext();
+            }
+            else switch (tokens.Current.Type)
+            {
+                case TokenTypeEnum.Number:
+                    type = TokenTypeEnum.Number;
+                    tokens.MoveNext();
+                    break;
+                case TokenTypeEnum.Real:
+                    type = TokenTypeEnum.Real;
+                    tokens.MoveNext();
+                    break;
+                case TokenTypeEnum.Char:
+                    type = TokenTypeEnum.Char;
+                    tokens.MoveNext();
+                    break;
+                default:
+                    AddError(tokens.Current);
+                    break;
+            }
+
+            first = Expressions.Factory.Create(lexeme, type);
+            return first;
         }
 
         private Expressions SecondArithmeticExpressionDeclaration()
