@@ -6,7 +6,8 @@ namespace Analyzer.Syntactic
 {
     public static class First
     {
-        private static readonly TokenTypeEnum[] types = {
+        private static readonly TokenTypeEnum[] types = 
+        {
             TokenTypeEnum.TypeInt,
             TokenTypeEnum.TypeChar,
             TokenTypeEnum.TypeFloat,
@@ -26,9 +27,19 @@ namespace Analyzer.Syntactic
             TokenTypeEnum.InteractionWhile
         };
         
-        private static readonly TokenTypeEnum[] factor = {
+        private static readonly TokenTypeEnum[] factor = 
+        {
             TokenTypeEnum.OperatorMultiplication,
             TokenTypeEnum.OperatorDivision
+        };
+
+        private static readonly TokenTypeEnum[] relationalOperation =
+        {
+            TokenTypeEnum.OperatorEquals,
+            TokenTypeEnum.OperatorLessEquals,
+            TokenTypeEnum.OperatorGreaterEquals,
+            TokenTypeEnum.OperatorBigger,
+            TokenTypeEnum.OperatorSmaller,
         };
         
         public static bool IsVariableDeclaration(this Token token)
@@ -84,6 +95,11 @@ namespace Analyzer.Syntactic
         public static bool IsFactorInExpression(this Token token)
         {
             return factor.Contains(token.Type);
+        }
+
+        public static bool IsRelationalOperation(this Token token)
+        {
+            return relationalOperation.Contains(token.Type);
         }
     }
 }

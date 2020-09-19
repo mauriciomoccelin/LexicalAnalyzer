@@ -175,7 +175,7 @@ namespace Analyzer.Syntactic
         {
             throw new System.NotImplementedException();
         }
-        
+
         public Expressions FirstArithmeticExpressionDeclaration()
         {
             var first = TermDeclaration();
@@ -251,6 +251,19 @@ namespace Analyzer.Syntactic
 
             first = Expressions.Factory.Create(lexeme, type);
             return first;
+        }
+
+        private TokenTypeEnum RelationalOperationDeclaration()
+        {
+            var operation = TokenTypeEnum.Undefined;
+
+            if (tokens.Current.IsRelationalOperation())
+            {
+                operation = tokens.Current.Type;
+                tokens.MoveNext();
+            } else AddError(tokens.Current);
+
+            return operation;
         }
 
         private Expressions SecondArithmeticExpressionDeclaration()
