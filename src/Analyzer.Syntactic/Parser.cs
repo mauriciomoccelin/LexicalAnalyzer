@@ -284,8 +284,8 @@ namespace Analyzer.Syntactic
         private Expressions SecondArithmeticExpressionDeclaration()
         {
             var operation = TokenTypeEnum.Undefined;
-            var first = Expressions.Factory.Empty();
-            var second = Expressions.Factory.Empty();
+            Expressions first;
+            Expressions second;
             
             if (tokens.Current.IsArithmeticOperation())
             {
