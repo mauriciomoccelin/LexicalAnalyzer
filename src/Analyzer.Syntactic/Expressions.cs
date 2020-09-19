@@ -32,6 +32,11 @@ namespace Analyzer.Syntactic
                 return new Expressions(string.Empty, TokenTypeEnum.Eof);
             }
             
+            public static Expressions Create(string lexeme)
+            {
+                return new Expressions(lexeme, TokenTypeEnum.Undefined);
+            }
+            
             public static Expressions Create(string lexeme, TokenTypeEnum type)
             {
                 return new Expressions(lexeme, type);

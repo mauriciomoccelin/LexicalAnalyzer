@@ -7,6 +7,7 @@ namespace Analyzer.Syntactic
     public class Parser : IParser
     {
         private int scope;
+        private int typeExpression;
         private IList<Symbols> symbols;
         private readonly IList<string> errors;
         private readonly IEnumerator<Token> tokens;
@@ -14,6 +15,7 @@ namespace Analyzer.Syntactic
         public Parser(IEnumerable<Token> tokens)
         {
             scope = -1;
+            typeExpression = 0;
             errors = new List<string>();
             symbols = new List<Symbols>();
             this.tokens = tokens?.GetEnumerator() ?? Enumerable.Empty<Token>().GetEnumerator();
@@ -253,6 +255,19 @@ namespace Analyzer.Syntactic
             return first;
         }
 
+        private string RelationalExpressionDeclaration()
+        {
+            var first = FirstArithmeticExpressionDeclaration();
+            var operation = RelationalOperationDeclaration();
+            var second = FirstArithmeticExpressionDeclaration();
+            
+            // TODO: How to build this relational operation?
+
+            var third = Expressions.Factory.Create(CreateTypeExpression());
+
+            return third.Lexeme;
+        }
+        
         private TokenTypeEnum RelationalOperationDeclaration()
         {
             var operation = TokenTypeEnum.Undefined;
@@ -288,6 +303,11 @@ namespace Analyzer.Syntactic
                 : symbols.First(x => string.Equals(x.Lexeme, token.Value) && x.Scoped.Equals(scope));
 
             return symbol;
+        }
+
+        private string CreateTypeExpression()
+        {
+            return "TypeExpression" + typeExpression++;
         }
 
         private void AddSymbol(TokenTypeEnum type)
