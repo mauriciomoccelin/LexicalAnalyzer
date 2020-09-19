@@ -283,7 +283,35 @@ namespace Analyzer.Syntactic
 
         private Expressions SecondArithmeticExpressionDeclaration()
         {
-            throw new System.NotImplementedException();
+            var operation = TokenTypeEnum.Undefined;
+            var first = Expressions.Factory.Empty();
+            var second = Expressions.Factory.Empty();
+            
+            if (tokens.Current.IsArithmeticOperation())
+            {
+                operation = tokens.Current.Type;
+                tokens.MoveNext();
+                first = TermDeclaration();
+                second = SecondArithmeticExpressionDeclaration();
+            }
+            else return null; // λ
+
+            if (second is null)
+            {
+                first = Expressions.Factory.Create(first.Lexeme, operation);
+                return first;
+            }
+
+            if (first.Type.Equals(TokenTypeEnum.TypeInt) && second.Type.Equals(TokenTypeEnum.TypeReal))
+            {
+                first = Expressions.Factory.Create(first.Lexeme, TokenTypeEnum.TypeReal);
+            }
+            else if (first.Type.Equals(TokenTypeEnum.TypeReal) && first.Type.Equals(TokenTypeEnum.TypeInt))
+            {
+                second = Expressions.Factory.Create(second.Lexeme, TokenTypeEnum.TypeReal);
+            }
+
+            return Expressions.Factory.Create(CreateTypeExpression(), second.Type);
         }
 
         public void AddError(Token token)
@@ -320,7 +348,7 @@ namespace Analyzer.Syntactic
                 case TokenTypeEnum.TypeChar:
                     symbols.Add(Symbols.Factory.CreateForCharType(scope, tokens.Current.Value));
                     break;
-                case TokenTypeEnum.TypeFloat:
+                case TokenTypeEnum.TypeReal:
                     symbols.Add(Symbols.Factory.CreateForFloatType(scope, tokens.Current.Value));
                     break;
                 default:

@@ -11,7 +11,7 @@ namespace Analyser.Lexical
         CloseKeys = 4,
         TypeInt = 5,
         TypeChar = 6,
-        TypeFloat = 7,
+        TypeReal = 7,
         Identifier = 8,
         Comma = 9,
         Semicolon = 10,

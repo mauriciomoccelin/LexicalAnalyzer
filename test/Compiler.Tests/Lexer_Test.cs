@@ -90,7 +90,7 @@ namespace Compiler.Tests
             #region Types
 
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"int"), TokenTypeEnum.TypeInt));
-            lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"real"), TokenTypeEnum.TypeFloat));
+            lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"real"), TokenTypeEnum.TypeReal));
 
             #endregion
             

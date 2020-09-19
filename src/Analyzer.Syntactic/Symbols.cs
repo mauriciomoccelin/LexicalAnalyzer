@@ -29,7 +29,7 @@ namespace Analyzer.Syntactic
             
             public static Symbols CreateForFloatType(int scoped,string lexeme)
             {
-                return new Symbols(scoped, lexeme, TokenTypeEnum.TypeFloat);
+                return new Symbols(scoped, lexeme, TokenTypeEnum.TypeReal);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Analyzer.Syntactic
         {
             TokenTypeEnum.TypeInt,
             TokenTypeEnum.TypeChar,
-            TokenTypeEnum.TypeFloat,
+            TokenTypeEnum.TypeReal,
         };
 
         private static readonly TokenTypeEnum[] commandBasic =
@@ -31,6 +31,12 @@ namespace Analyzer.Syntactic
         {
             TokenTypeEnum.OperatorMultiplication,
             TokenTypeEnum.OperatorDivision
+        };
+        
+        private static readonly TokenTypeEnum[] arithmeticOperation = 
+        {
+            TokenTypeEnum.OperatorSum,
+            TokenTypeEnum.OperatorSubtraction
         };
 
         private static readonly TokenTypeEnum[] relationalOperation =
@@ -95,6 +101,11 @@ namespace Analyzer.Syntactic
         public static bool IsFactorInExpression(this Token token)
         {
             return factor.Contains(token.Type);
+        }
+        
+        public static bool IsArithmeticOperation(this Token token)
+        {
+            return arithmeticOperation.Contains(token.Type);
         }
 
         public static bool IsRelationalOperation(this Token token)
