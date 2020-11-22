@@ -193,7 +193,33 @@ namespace Analyzer.Syntactic
 
         public void ConditionalCommandDeclaration()
         {
-            throw new System.NotImplementedException();
+            if (tokens.Current.Type.Equals(TokenTypeEnum.ReservedWordIf))
+            {
+                tokens.MoveNext();
+                if (tokens.Current.Type.Equals(TokenTypeEnum.OpenParentheses))
+                {
+                    tokens.MoveNext();
+                    var expressions = RelationalExpressionDeclaration();
+                    // TODO: How to skip to the else
+
+                    if (tokens.Current.Type.Equals(TokenTypeEnum.CloseParentheses))
+                    {
+                        tokens.MoveNext();
+                        CommandDeclaration();
+                        
+                        if (tokens.Current.Type.Equals(TokenTypeEnum.ReservedWordElse))
+                        {
+                            // TODO: How to jump to the end or something else
+                            
+                            tokens.MoveNext();
+                            CommandDeclaration();
+                        }
+                    }
+                    else AddError(tokens.Current);
+                }
+                else AddError(tokens.Current);
+            }
+            else AddError(tokens.Current);
         }
 
         public Expressions FirstArithmeticExpressionDeclaration()

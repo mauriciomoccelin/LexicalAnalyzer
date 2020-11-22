@@ -24,7 +24,7 @@ namespace Analyzer.Syntactic
             TokenTypeEnum.OpenKeys,
             TokenTypeEnum.Identifier,
             TokenTypeEnum.ReservedWordFor,
-            TokenTypeEnum.InteractionWhile
+            TokenTypeEnum.ReservedWordWhile
         };
         
         private static readonly TokenTypeEnum[] factor = 
@@ -80,12 +80,12 @@ namespace Analyzer.Syntactic
         
         public static bool IsInteractionCommand(this Token token)
         {
-            return token.Type == TokenTypeEnum.InteractionWhile;
+            return token.Type == TokenTypeEnum.ReservedWordWhile;
         }
 
         public static bool IsConditionalCommand(this Token token)
         {
-            return token.Type == TokenTypeEnum.ConditionalIf;
+            return token.Type == TokenTypeEnum.ReservedWordIf;
         }
 
         public static bool IsAssignment(this Token token)
