@@ -1,20 +1,49 @@
-using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Analyser.Lexical;
 using Analyzer.Syntactic;
-using FluentAssertions;
 using Xunit;
 
 namespace Compiler.Tests
 {
-    public class Lexer_Test
+    [CollectionDefinition(nameof(CompilerColletion))]
+    public class CompilerColletion : ICollectionFixture<CompilerFixture> { }
+    public class CompilerFixture : IDisposable
     {
-        private IParser parser;
-        private readonly ILexer lexer;
-
-        public Lexer_Test()
+        public string GetFullCodeSample()
         {
-            lexer = new Lexer();
+            const string code = @"
+                int main() {
+                    int one,two,three;
+                    real result;
+                    
+                    one = 1;
+                    two = 2;
+                    three = 3;
+                    
+                    result = 5 / one + two + three * 8 + 5 * 7;
+                    
+                    while (one == two) {
+                        one = 1;
+                    }
+
+                    
+                    if (one == two) {
+                        three = 4;    
+                    }
+                    else {
+                        three = 3;
+                    }
+                }
+            ";
+
+            return code;
+        }
+
+        public ILexer GetLexer()
+        {
+            ILexer lexer = new Lexer();
 
             #region Numeric
 
@@ -76,9 +105,9 @@ namespace Compiler.Tests
 
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"main"), TokenTypeEnum.Main));
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"var"), TokenTypeEnum.ReservedWordVar));
-            lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"while"), TokenTypeEnum.InteractionWhile));
+            lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"while"), TokenTypeEnum.ReservedWordWhile));
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"for"), TokenTypeEnum.ReservedWordFor));
-            lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"if"), TokenTypeEnum.ConditionalIf));
+            lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"if"), TokenTypeEnum.ReservedWordIf));
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"else"), TokenTypeEnum.ReservedWordElse));
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"switch"), TokenTypeEnum.ReservedWordSwitch));
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"case"), TokenTypeEnum.ReservedWordCase));
@@ -99,32 +128,16 @@ namespace Compiler.Tests
             lexer.AddDefinition(TokenDefinition.Factory.Create(new Regex(@"[A-Za-z_][a-zA-Z0-9_]+"), TokenTypeEnum.Identifier));
 
             #endregion
+
+            return lexer;
         }
 
-        [Fact]
-        public void Tokenize()
+        public IParser GetParser(IEnumerable<Token> tokens)
         {
-            const string code = @"
-                int main() {
-                    int one,two,three;
-                    real result;
-                    
-                    one = 1;
-                    two = 2;
-                    three = 3;
-                    
-                    result = 5 / one + two + three * 8 + 5 * 7;
-                }
-            ";
-            
-            // lexical
-            var tokens = lexer.Tokenize(code);
-            var enumerable = tokens as Token[] ?? tokens.ToArray();
-            enumerable.Any(x => x.Type.Equals(TokenTypeEnum.Eof)).Should().BeTrue();
-            
-            // syntactic
-            parser = new Parser(enumerable);
-            parser.Run();
+            IParser parser = new Parser(tokens);
+            return parser;
         }
+
+        public void Dispose() { }
     }
 }
