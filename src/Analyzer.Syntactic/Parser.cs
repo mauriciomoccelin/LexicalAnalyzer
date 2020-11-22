@@ -170,6 +170,24 @@ namespace Analyzer.Syntactic
 
         public void InteractionCommandDeclaration()
         {
+            tokens.MoveNext();
+            if (tokens.Current.Type.Equals(TokenTypeEnum.OpenParentheses))
+            {
+                tokens.MoveNext();
+                var expressions = RelationalExpressionDeclaration();
+                // TODO: How to generate validate expression
+
+                if (tokens.Current.Type.Equals(TokenTypeEnum.CloseParentheses))
+                {
+                    tokens.MoveNext();
+                    CommandDeclaration();
+                }
+                else AddError(tokens.Current);
+                
+                // TODO: How to generate return to the initial call
+            }
+            else AddError(tokens.Current);
+            
             throw new System.NotImplementedException();
         }
 
